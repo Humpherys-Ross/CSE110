@@ -1,3 +1,5 @@
+import math # Allows us to use math.pi
+
 # Write a program that asks the user to enter the length of the sides of a square, rectangle, and circle and then displays the area of each such shape.
 
 # Core Requirements
@@ -25,7 +27,6 @@
 
 # First Challenge
 # Instead of using 3.14 for your value of Pi, see if you can find and use the built-in value of Pi included in the python "math" module.
-import math # Allows us to use math.pi
 
 # Area of a circle
 # radius = float(input("Enter the radius of the circle? "))
