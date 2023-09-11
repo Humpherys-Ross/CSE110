@@ -1,5 +1,3 @@
-# Ask the user for the following:
-
 # Added the ability to enter a tip percentage and calculate the tip amount and total price of the meal.
 # Added the ability to enter beverages and calculate the total price of the meal.
 
