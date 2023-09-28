@@ -95,6 +95,7 @@ def dig_branch():
         elif response == "HIDE":
             print("\nFrom your hiding spot, you observe a secret exit!")
         else:
+            # if the user enters an invalid choice, restart the game
             print("\nInvalid choice. Restarting the adventure.")
             # call the main_game function to restart the game
             main_game()
@@ -102,11 +103,13 @@ def dig_branch():
     elif response == "TAKE":
         print("\nThe tunnel is filled with traps. You narrowly dodge them and find a way out!")
     else:
+        # if the user enters an invalid choice, restart the game
         print("\nInvalid choice. Restarting the adventure.")
+        # call the main_game function to restart the game
         main_game()
 
 def wait_branch():
-    """Branch for choosing to WAIT."""
+    # Branch for choosing to WAIT.
     print("\nThe guard eventually falls asleep.")
     
     # Level 2 Choices
@@ -114,7 +117,7 @@ def wait_branch():
     print("- GRAB the keys silently.")
     print("- ATTACK the guard.")
     print("- SLIP past the guard.")
-    
+    # get user input and convert to uppercase so we get a match regardless of case
     response = input().upper()
 
     # Level 2 Branches
@@ -126,7 +129,7 @@ def wait_branch():
         print("- UNLOCK your cell.")
         print("- FREE other prisoners.")
         print("- THROW keys at the guard.")
-        
+        # get user input and convert to uppercase so we get a match regardless of case
         response = input().upper()
 
         # Level 3 Branches
@@ -136,22 +139,28 @@ def wait_branch():
             print("\nThe prisoners rally together and overpower the guards. Freedom is yours!")
         elif response == "THROW":
             print("\nThe keys clang loudly, waking up the guard. Game Over.")
+            # call the game_over function to restart the game
             game_over()
         else:
+            # if the user enters an invalid choice, restart the game
             print("\nInvalid choice. Restarting the adventure.")
+            # call the main_game function to restart the game
             main_game()
 
     elif response == "ATTACK":
         print("\nThe guard overpowers you. Game Over.")
+        # call the game_over function to restart the game
         game_over()
     elif response == "SLIP":
         print("\nYou make your way silently, finding a map of the castle!")
     else:
+        # if the user enters an invalid choice, restart the game
         print("\nInvalid choice. Restarting the adventure.")
+        # call the main_game function to restart the game
         main_game()
 
 def sing_branch():
-    """Branch for choosing to SING."""
+    # Branch for choosing to SING.
     print("\nYour haunting melody attracts a curious maid.")
     
     # Level 2 Choices
@@ -159,7 +168,7 @@ def sing_branch():
     print("- ASK her to help.")
     print("- BEFRIEND her.")
     print("- THREATEN her.")
-    
+    # get user input and convert to uppercase so we get a match regardless of case
     response = input().upper()
 
     # Level 2 Branches
@@ -171,7 +180,7 @@ def sing_branch():
         print("- FOLLOW her instructions.")
         print("- DECEIVE and bind her.")
         print("- GIVE her a gift in gratitude.")
-        
+        # get user input and convert to uppercase so we get a match regardless of case
         response = input().upper()
 
         # Level 3 Branches
@@ -179,25 +188,32 @@ def sing_branch():
             print("\nYou follow her instructions and successfully escape!")
         elif response == "DECEIVE":
             print("\nThe maid screams, alerting the guards. Game Over.")
+            # call the game_over function to restart the game
             game_over()
         elif response == "GIVE":
             print("\nTouched by your kindness, she helps you find the safest way out.")
         else:
+            # if the user enters an invalid choice, restart the game
             print("\nInvalid choice. Restarting the adventure.")
+            # call the main_game function to restart the game
             main_game()
 
     elif response == "BEFRIEND":
         print("\nOver time, you earn her trust. She assists in your escape!")
     elif response == "THREATEN":
         print("\nStartled, the maid alerts the guards. Game Over.")
+        # call the game_over function to restart the game
         game_over()
     else:
+        # if the user enters an invalid choice, restart the game
         print("\nInvalid choice. Restarting the adventure.")
+        # call the main_game function to restart the game
         main_game()
 
 def game_over():
     # Handles the game over scenario and restarts the game.
     print("\nYou've met an unfortunate end. Restarting the adventure...")
+    # call the main_game function to restart the game
     main_game()
 
 # Start the game!
