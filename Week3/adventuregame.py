@@ -29,79 +29,170 @@
 # It is up to you how to handle this case.
 
 def main_game():
+    # Starting point of the game.
     print("\nWelcome to the 'Escape from Draken Castle'!\n")
-    print("You are imprisoned in the infamous Draken Castle. The only light filtering in is from the bars in a high window. As you contemplate your fate, three choices present themselves:")
+    print("You are imprisoned in the infamous Draken Castle. The only light filtering in is from the bars in a high window.")
     
+    # Level 1 Choices
     print("\n1) What will you do?")
     print("- DIG beneath the floor using your spoon.")
-    print("- WAIT for the guard to doze off and try to steal his keys.")
-    print("- SING a haunting tune to lure someone closer.")
-    
+    print("- WAIT for the guard to doze off.")
+    print("- SING a haunting tune.")
+    # get user input and convert to uppercase so we get a match regardless of case 
     response = input().upper()
 
+    # Level 1 Branches
     if response == "DIG":
-        print("\nHours seem like days, but your determination pays off. You discover a hidden passage below!")
-        print("\n2) The passage splits into three:")
-        print("- FOLLOW the left tunnel.")
-        print("- GO straight down the middle.")
-        print("- TAKE the right tunnel.")
-        
-        response = input().upper()
-        
-        if response == "FOLLOW":
-            print("\nThe tunnel leads to the outside, but you are immediately spotted by the guards. They end your escape attempt permanently.")
-            main_game()
-        elif response == "GO":
-            print("\nWalking cautiously, you suddenly step into a room filled with treasure and a hidden exit!")
-        elif response == "TAKE":
-            print("\nYou find yourself in the castle's dungeons. However, an unnoticed open cell leads to a secret exit!")
-        else:
-            print("\nInvalid choice. Restarting the adventure.")
-            main_game()
-    
+        dig_branch()
     elif response == "WAIT":
-        print("\nAfter what seems like eternity, the guard starts snoring loudly.")
-        print("\n2) What's your next move?")
-        print("- GRAB the keys silently.")
-        print("- ATTACK the guard with your chains.")
-        print("- SLIP past the guard without confronting him.")
-        
-        response = input().upper()
-
-        if response == "GRAB":
-            print("\nSuccess! You unlock your cell and find an unguarded exit!")
-        elif response == "ATTACK":
-            print("\nAs you try to overpower the guard, he awakens and calls for backup. They swiftly end your escape and your life.")
-            main_game()
-        elif response == "SLIP":
-            print("\nYou quietly move past the guard and find yourself in a long corridor leading to freedom!")
-        else:
-            print("\nInvalid choice. Restarting the adventure.")
-            main_game()
-
+        wait_branch()
     elif response == "SING":
-        print("\nYour haunting melody attracts a curious maid.")
-        print("\n2) How do you respond to her approach?")
-        print("- ASK her to help you escape.")
-        print("- BEFRIEND her and gain her trust.")
-        print("- THREATEN her to open the cell.")
+        sing_branch()
+    else:
+        # if the user enters an invalid choice, restart the game
+        print("\nInvalid choice. Restarting the adventure.")
+        # call the main_game function to restart the game
+        main_game()
+
+def dig_branch():
+    # Branch for choosing to DIG.
+    print("\nYou discover a hidden passage below!")
+    
+    # Level 2 Choices
+    print("\n2) The passage splits into three:")
+    print("- FOLLOW the left tunnel.")
+    print("- GO straight down the middle.")
+    print("- TAKE the right tunnel.")
+    # get user input and convert to uppercase so we get a match regardless of case 
+    response = input().upper()
+
+    # Level 2 Branches
+    if response == "FOLLOW":
+        print("\nThe tunnel leads outside, but a pitfall catches you off-guard.")
+        # call the game_over function to restart the game
+        game_over()
+    elif response == "GO":
+        print("\nYou stumble upon an underground chamber filled with glowing gems.")
         
+        # Level 3 Choices
+        print("\n3) What do you do?")
+        print("- TOUCH a gem.")
+        print("- EXIT the chamber.")
+        print("- HIDE and observe.")
+        # get user input and convert to uppercase so we get a match regardless of case 
         response = input().upper()
 
-        if response == "ASK":
-            print("\nThe maid, feeling pity, gives you a map and a key. Following her instructions, you find a secret exit!")
-        elif response == "BEFRIEND":
-            print("\nYou and the maid become friends. She discreetly helps you escape during her next visit!")
-        elif response == "THREATEN":
-            print("\nStartled, the maid screams, attracting the guards who ensure you never threaten anyone again.")
-            main_game()
+        # Level 3 Branches
+        if response == "TOUCH":
+            print("\nThe gem emits a blinding light and you vanish. Game Over.")
+            # call the game_over function to restart the game
+            game_over()
+        elif response == "EXIT":
+            print("\nYou cautiously exit the chamber, making your way to freedom!")
+        elif response == "HIDE":
+            print("\nFrom your hiding spot, you observe a secret exit!")
         else:
             print("\nInvalid choice. Restarting the adventure.")
+            # call the main_game function to restart the game
             main_game()
-    
+
+    elif response == "TAKE":
+        print("\nThe tunnel is filled with traps. You narrowly dodge them and find a way out!")
     else:
         print("\nInvalid choice. Restarting the adventure.")
         main_game()
 
-# Start the game!
-main_game()
+def wait_branch():
+    """Branch for choosing to WAIT."""
+    print("\nThe guard eventually falls asleep.")
+    
+    # Level 2 Choices
+    print("\n2) What's your next move?")
+    print("- GRAB the keys silently.")
+    print("- ATTACK the guard.")
+    print("- SLIP past the guard.")
+    
+    response = input().upper()
+
+    # Level 2 Branches
+    if response == "GRAB":
+        print("\nSuccess! You have the keys in hand.")
+        
+        # Level 3 Choices
+        print("\n3) What's your next action?")
+        print("- UNLOCK your cell.")
+        print("- FREE other prisoners.")
+        print("- THROW keys at the guard.")
+        
+        response = input().upper()
+
+        # Level 3 Branches
+        if response == "UNLOCK":
+            print("\nYou successfully unlock your cell and escape the castle!")
+        elif response == "FREE":
+            print("\nThe prisoners rally together and overpower the guards. Freedom is yours!")
+        elif response == "THROW":
+            print("\nThe keys clang loudly, waking up the guard. Game Over.")
+            game_over()
+        else:
+            print("\nInvalid choice. Restarting the adventure.")
+            main_game()
+
+    elif response == "ATTACK":
+        print("\nThe guard overpowers you. Game Over.")
+        game_over()
+    elif response == "SLIP":
+        print("\nYou make your way silently, finding a map of the castle!")
+    else:
+        print("\nInvalid choice. Restarting the adventure.")
+        main_game()
+
+def sing_branch():
+    """Branch for choosing to SING."""
+    print("\nYour haunting melody attracts a curious maid.")
+    
+    # Level 2 Choices
+    print("\n2) How do you respond to her approach?")
+    print("- ASK her to help.")
+    print("- BEFRIEND her.")
+    print("- THREATEN her.")
+    
+    response = input().upper()
+
+    # Level 2 Branches
+    if response == "ASK":
+        print("\nThe maid, moved by your plight, offers you a hidden escape route.")
+        
+        # Level 3 Choices
+        print("\n3) How do you proceed?")
+        print("- FOLLOW her instructions.")
+        print("- DECEIVE and bind her.")
+        print("- GIVE her a gift in gratitude.")
+        
+        response = input().upper()
+
+        # Level 3 Branches
+        if response == "FOLLOW":
+            print("\nYou follow her instructions and successfully escape!")
+        elif response == "DECEIVE":
+            print("\nThe maid screams, alerting the guards. Game Over.")
+            game_over()
+        elif response == "GIVE":
+            print("\nTouched by your kindness, she helps you find the safest way out.")
+        else:
+            print("\nInvalid choice. Restarting the adventure.")
+            main_game()
+
+    elif response == "BEFRIEND":
+        print("\nOver time, you earn her trust. She assists in your escape!")
+    elif response == "THREATEN":
+        print("\nStartled, the maid alerts the guards. Game Over.")
+        game_over()
+    else:
+        print("\nInvalid choice. Restarting the adventure.")
+        main_game()
+
+def game_over():
+    """Handles the game over scenario and restarts the game."""
+    print("\nYou've met an unfortunate end. Restarting the adventure...")
+    main_game()
