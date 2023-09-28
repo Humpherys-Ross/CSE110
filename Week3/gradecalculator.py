@@ -46,7 +46,7 @@ if grade >= 93:
 if letter == 'F':
     sign = ''
 
-print(f'Your letter grade is {letter}.')
+print(f'Your letter grade is {letter}{sign}.')
 
 if grade >= 70:
     print('Congratulations, you passed the course!')
