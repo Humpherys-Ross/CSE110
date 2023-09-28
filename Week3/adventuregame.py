@@ -193,6 +193,9 @@ def sing_branch():
         main_game()
 
 def game_over():
-    """Handles the game over scenario and restarts the game."""
+    # Handles the game over scenario and restarts the game.
     print("\nYou've met an unfortunate end. Restarting the adventure...")
     main_game()
+
+# Start the game!
+main_game()
