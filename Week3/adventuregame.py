@@ -1,3 +1,6 @@
+# I have added a death and game over scenario to the game. There is one option in each branch that will lead to a game over.
+# I have also added a restart function that will restart the game if the user makes an invalid choice or reaches a game over scenario.
+
 # Create your own text-based adventure game with at least three levels of choices. 
 # It's up to you to determine the scenarios, the choices, and the consequences.
 
