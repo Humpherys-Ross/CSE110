@@ -216,5 +216,6 @@ def game_over():
     # call the main_game function to restart the game
     main_game()
 
-# Start the game!
-main_game()
+
+# Start the game
+if __name__ == "__main__": main_game()
