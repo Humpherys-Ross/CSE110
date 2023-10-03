@@ -54,7 +54,7 @@ import random
 
 def wordpuzzle():
     print("Welcome to the Word Guessing Game!")
-    print("You have 10 guessesto find the correct word.")
+    print("You have 10 guesses to find the correct word.")
 
     # Initialize guess count
     guess_count = 0
@@ -90,8 +90,8 @@ def wordpuzzle():
         if len(answer) != secret_word_length:
             # Increment guess count
             guess_count += 1
-            print(f"Sorry, the guess must have the same number of letters as"
-                  f"the secret word. You have {total_guesses - guess_count}"
+            print(f"Sorry, the guess must have the same number of letters as "
+                  f"the secret word. You have {total_guesses - guess_count} "
                   f"guesses remaining.")
             # If the guess has the same length, display wrong letters as "_",
             # letters in the wrong spot as lowercase, and letters in the right
@@ -111,7 +111,7 @@ def wordpuzzle():
                     hint = hint[:i] + "_" + hint[i + 1:]
             # Increment guess count
             guess_count += 1
-            print(f"Incorrect. You have {total_guesses - guess_count} guesses"
+            print(f"Incorrect. You have {total_guesses - guess_count} guesses "
                   f"remaining.")
         # If the guess is correct, display congratulations and the number of
         # guesses
@@ -125,7 +125,7 @@ def wordpuzzle():
     # If the guess is incorrect and the guess count is equal to the total
     # guesses, display that the user ran out of guesses and the secret word
     if secret_word != answer:
-        print(f"\nSorry, you ran out of guesses. The secret word was"
+        print(f"\nSorry, you ran out of guesses. The secret word was "
               f"{secret_word}.")
 
 
