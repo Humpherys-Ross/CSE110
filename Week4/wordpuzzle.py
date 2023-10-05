@@ -1,5 +1,7 @@
 # added an array for words to be picked at random and I added a limited number
 # of guesses. It shows the correct answer if you run out of guesses
+# I also added a way to play again if you want to play again on success or
+# failure
 
 import random
 
@@ -90,8 +92,11 @@ def wordpuzzle():
     # Generate initial hint
     hint = "_" * secret_word_length
 
+    keep_playing = "yes"
+
     # Prompt the user for a guess
-    while secret_word != answer and guess_count < total_guesses:
+    while secret_word != answer and guess_count < total_guesses and \
+            keep_playing == "yes":
         # Display hint
         print(f"\nThe hint is: {hint}")
         # Prompt user for guess
@@ -135,6 +140,11 @@ def wordpuzzle():
             # Increment guess count
             guess_count += 1
             print(f"It took you {guess_count} guesses.")
+        keep_playing = input("Do you want to play again (yes/no)? ").lower()
+        if keep_playing == "yes":
+            wordpuzzle()
+        else:
+            print("Thanks for playing. Goodbye.")
             # Exit the loop since the guess is correct
             break
     # If the guess is incorrect and the guess count is equal to the total
@@ -144,6 +154,11 @@ def wordpuzzle():
             f"\nSorry, you ran out of guesses. The secret word was "
             f"{secret_word.upper()}."
         )
+        keep_playing = input("Do you want to play again (yes/no)? ").lower()
+        if keep_playing == "yes":
+            wordpuzzle()
+        else:
+            print("Thanks for playing. Goodbye.")
 
 
 # start the game
