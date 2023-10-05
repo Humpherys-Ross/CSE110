@@ -2,6 +2,7 @@
 # of guesses. It shows the correct answer if you run out of guesses
 
 import random
+
 # By the middle of the week, to help make sure you are on track to finish the
 # assignment, you need to complete the following:
 
@@ -64,8 +65,18 @@ def wordpuzzle():
     answer = ""
 
     # Make array of words
-    word_array = ["Apple", "Brave", "Chair", "Drive", "Earth", "Flare",
-                  "Ghost", "Heart", "Inlet", "Juice"]
+    word_array = [
+        "Apple",
+        "Brave",
+        "Chair",
+        "Drive",
+        "Earth",
+        "Flare",
+        "Ghost",
+        "Heart",
+        "Inlet",
+        "Juice",
+    ]
     # Choose random word from array
     secret_word = random.choice(word_array).lower()
     # verify that the secret word is chosen correctly
@@ -90,9 +101,11 @@ def wordpuzzle():
         if len(answer) != secret_word_length:
             # Increment guess count
             guess_count += 1
-            print(f"Sorry, the guess must have the same number of letters as "
-                  f"the secret word. You have {total_guesses - guess_count} "
-                  f"guesses remaining.")
+            print(
+                f"Sorry, the guess must have the same number of letters as "
+                f"the secret word. You have {total_guesses - guess_count} "
+                f"guesses remaining."
+            )
             # If the guess has the same length, display wrong letters as "_",
             # letters in the wrong spot as lowercase, and letters in the right
             # spot as uppercase
@@ -111,8 +124,10 @@ def wordpuzzle():
                     hint = hint[:i] + "_" + hint[i + 1:]
             # Increment guess count
             guess_count += 1
-            print(f"Incorrect. You have {total_guesses - guess_count} guesses "
-                  f"remaining.")
+            print(
+                f"Incorrect. You have {total_guesses - guess_count} guesses "
+                f"remaining."
+            )
         # If the guess is correct, display congratulations and the number of
         # guesses
         else:
@@ -125,8 +140,10 @@ def wordpuzzle():
     # If the guess is incorrect and the guess count is equal to the total
     # guesses, display that the user ran out of guesses and the secret word
     if secret_word != answer:
-        print(f"\nSorry, you ran out of guesses. The secret word was "
-              f"{secret_word}.")
+        print(
+            f"\nSorry, you ran out of guesses. The secret word was "
+            f"{secret_word.upper()}."
+        )
 
 
 # start the game
