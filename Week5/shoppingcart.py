@@ -34,14 +34,18 @@
 print("Welcome to the Shopping Cart Program!")
 # create empty list
 cart = []
+prices = []
 
 
-# def add item
+# def add item and ask for price
 def add_item():
     # ask user for item and capitalize the item
     item = input("What item would you like to add? ").capitalize()
+    # ask user for price
+    price = float(input(f"What is the price of '{item}'? "))
     # add item to cart
     cart.append(item)
+    prices.append(price)
     # print item added to cart
     print(f"'{item}' has been added to the cart.")
     print()
@@ -70,14 +74,6 @@ def remove_item():
 
 # def compute total
 def compute_total():
-    # create empty list
-    prices = []
-    # loop through cart
-    for item in cart:
-        # ask user for price of item
-        price = float(input(f"What is the price of '{item}'? "))
-        # add price to prices list
-        prices.append(price)
     # print total price of cart and format to 2 decimal places
     print(f"The total price of the cart is ${sum(prices):.2f}")
     print()
