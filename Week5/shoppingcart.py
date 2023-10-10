@@ -57,6 +57,32 @@ def view_cart():
     print()
 
 
+# def remove item
+def remove_item():
+    # ask user for item and capitalize the item
+    item = input("What item would you like to remove? ").capitalize()
+    # remove item from cart
+    cart.remove(item)
+    # print item removed from cart
+    print(f"'{item}' has been removed from the cart.")
+    print()
+
+
+# def compute total
+def compute_total():
+    # create empty list
+    prices = []
+    # loop through cart
+    for item in cart:
+        # ask user for price of item
+        price = float(input(f"What is the price of '{item}'? "))
+        # add price to prices list
+        prices.append(price)
+    # print total price of cart and format to 2 decimal places
+    print(f"The total price of the cart is ${sum(prices):.2f}")
+    print()
+
+
 # def quit
 def quit():
     # print goodbye message
@@ -64,9 +90,6 @@ def quit():
     # exit program
     exit()
 
-
-# def remove item
-# def compute total
 
 def show_menu():
     # print menu
@@ -87,10 +110,12 @@ def show_menu():
         # if choice == 2, call view cart
         elif choice == 2:
             view_cart()
-        # elif choice == 3:
-        #     remove_item()
-        # elif choice == 4:
-        #     compute_total()
+        # if choice == 3, call remove item
+        elif choice == 3:
+            remove_item()
+        # if choice == 4, call compute total
+        elif choice == 4:
+            compute_total()
         # elif choice == 5, call quit
         elif choice == 5:
             quit()
