@@ -45,31 +45,53 @@ def add_item():
     price = float(input(f"What is the price of '{item}'? "))
     # add item to cart
     cart.append(item)
+    # test to view item added to the array
+    # print(cart)
+    # add price to prices
     prices.append(price)
+    # test to view price added to the array
+    # print(prices)
     # print item added to cart
     print(f"'{item}' has been added to the cart.")
     print()
 
 
-# def view cart
+# def view cart including prices
 def view_cart():
-    # print contents of cart
-    print("\nThe contents of the shopping cart are: ")
-    # loop through cart and print each item
-    for item in cart:
-        print(item)
+    # if cart is empty, print cart is empty
+    if not cart:
+        print("The cart is empty.")
+    # else print items in cart
+    else:
+        print("The contents of the shopping cart are:")
+        # for each item in cart, print item and price
+        # using the enumerate function to get the index of the item
+        for index, item in enumerate(cart):
+            # print item and price in the following format:
+            # 1. Item - $price
+            print(f"{index + 1}. {item} - ${prices[cart.index(item)]:.2f}")
     print()
 
 
 # def remove item
 def remove_item():
-    # ask user for item and capitalize the item
-    item = input("What item would you like to remove? ").capitalize()
-    # remove item from cart
-    cart.remove(item)
-    # print item removed from cart
-    print(f"'{item}' has been removed from the cart.")
-    print()
+    # if cart is empty, print cart is empty
+    if not cart:
+        print("The cart is empty.")
+    # else print items in cart
+    else:
+        # ask user for item number to remove from cart
+        item_num = int(input("Which item would you like to remove? "))
+        # find index of item in cart and remove item
+        if 0 < item_num <= len(cart):
+            # use the pop method to remove the item from the list
+            cart.pop(item_num - 1)
+            # use the pop method to remove the price from the list
+            prices.pop(item_num - 1)
+            print("Item removed.")
+        # else print item not in cart
+        else:
+            print("Sorry, we couldn't find that item in the cart.")
 
 
 # def compute total
