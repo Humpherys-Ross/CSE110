@@ -1,3 +1,8 @@
+# I added the ability to add quantities for the items in the card as well as
+# the ability to remove a certain quantity of an item from the cart. If the
+# quantity of an item is 1, it will just remove it. Otherwise, it will ask
+# the user how many of the item they would like to remove.
+
 # For this project you will create a program that stores a list of products in
 # a shopping cart along with their prices. The user should have the ability to
 # add items to the list, remove them, and see the total price of the cart.
@@ -35,6 +40,7 @@ print("Welcome to the Shopping Cart Program!")
 # create empty list
 cart = []
 prices = []
+quantity = []
 
 
 # def add item and ask for price
@@ -43,6 +49,8 @@ def add_item():
     item = input("What item would you like to add? ").capitalize()
     # ask user for price
     price = float(input(f"What is the price of '{item}'? "))
+    # ask user for quantity
+    item_quantity = int(input(f"How many '{item}' would you like to add? "))
     # add item to cart
     cart.append(item)
     # test to view item added to the array
@@ -52,7 +60,11 @@ def add_item():
     # test to view price added to the array
     # print(prices)
     # print item added to cart
-    print(f"'{item}' has been added to the cart.")
+    # add quantity to quantity
+    quantity.append(item_quantity)
+    # test to view quantity added to the array
+    # print(quantity)
+    print(f"{item_quantity} of '{item}' has been added to the cart.")
     print()
 
 
@@ -68,8 +80,9 @@ def view_cart():
         # using the enumerate function to get the index of the item
         for index, item in enumerate(cart):
             # print item and price in the following format:
-            # 1. Item - $price
-            print(f"{index + 1}. {item} - ${prices[cart.index(item)]:.2f}")
+            # 1. Item - $price x quantity
+            print(f"{index + 1}. {item} - ${prices[cart.index(item)]:.2f} x "
+                  f"{quantity[cart.index(item)]}")
     print()
 
 
@@ -84,21 +97,43 @@ def remove_item():
         item_num = int(input("Which item would you like to remove? "))
         # find index of item in cart and remove item
         if 0 < item_num <= len(cart):
-            # use the pop method to remove the item from the list
-            cart.pop(item_num - 1)
-            # use the pop method to remove the price from the list
-            prices.pop(item_num - 1)
-            print("Item removed.")
+            if quantity[item_num - 1] > 1:
+                remove_quantity = int(input(f"How many of "
+                                            f"'{cart[item_num - 1]}' would you"
+                                            f" like to remove? "))
+                if remove_quantity < quantity[item_num - 1]:
+                    quantity[item_num - 1] -= remove_quantity
+                    print(f"{remove_quantity} of '{cart[item_num - 1]}' has "
+                          f"been removed from the cart.")
+                elif remove_quantity == quantity[item_num - 1]:
+                    # use the pop method to remove the item from the list
+                    cart.pop(item_num - 1)
+                    # use the pop method to remove the price from the list
+                    prices.pop(item_num - 1)
+                    # use the pop method to remove the quantity from the list
+                    quantity.pop(item_num - 1)
+                else:
+                    print("Invalid quantity. No items removed.")
+            else:
+                # use the pop method to remove the item from the list
+                cart.pop(item_num - 1)
+                # use the pop method to remove the price from the list
+                prices.pop(item_num - 1)
+                # use the pop method to remove the quantity from the list
+                quantity.pop(item_num - 1)
+                print("Item removed.")
         # else print item not in cart
         else:
             print("Sorry, we couldn't find that item in the cart.")
+    print()
 
 
 # def compute total
 def compute_total():
     # print total price of cart and format to 2 decimal places
-    print(f"The total price of the cart is ${sum(prices):.2f}")
-    print()
+    total_price = sum(price * quantity for price, quantity in zip(prices,
+                                                                  quantity))
+    print(f"The total price of the cart is ${total_price:.2f}\n")
 
 
 # def quit
