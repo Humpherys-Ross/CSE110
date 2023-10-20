@@ -1,3 +1,5 @@
+# Allow for the user to search via year or country
+
 # Download the dataset and write a Python program to analyze it to answer the
 # following questions:
 
@@ -55,6 +57,9 @@ max_life_year = ""
 # create a dictionary to store the average life expectancy for each year
 life_expectancies_by_year = {}
 
+# create a dictionary to store the average life expectancy for each country
+life_expectancies_by_country = {}
+
 # open the file, week6/life-expectancy.csv and read it line by line
 with open("Week6/life-expectancy.csv", "r") as file:
     # skip the first line
@@ -89,47 +94,84 @@ with open("Week6/life-expectancy.csv", "r") as file:
         # add the life expectancy to the list for the year
         life_expectancies_by_year[year].append((entity, life_expectancy))
 
-# ask the user for a year
-user_year = int(input("Enter the year of interest: "))
+        # check if the country is already in the dictionary
+        if entity not in life_expectancies_by_country:
+            life_expectancies_by_country[entity] = []
 
-# calculate the average life expectancy for the year
-if user_year in life_expectancies_by_year:
-    life_expectancies = [le for _, le in life_expectancies_by_year[user_year]]
-    avg_life_expectancy = sum(life_expectancies) / len(life_expectancies)
+        # add the life expectancy to the list for the country
+        life_expectancies_by_country[entity].append((year, life_expectancy))
+
+# ask the user whether they want to search by year or country
+search_type = input("Do you want to search by (Y)ear or (C)ountry? ")
+search_type = search_type.strip().lower()  # This is for formatting purposes
+
+if search_type == "y":
+
+    # ask the user for a year
+    user_year = int(input("Enter the year of interest: "))
+
+    # calculate the average life expectancy for the year
+    if user_year in life_expectancies_by_year:
+        life_expectancies = [le for _, le in
+                             life_expectancies_by_year[user_year]]
+        avg_life_expectancy = sum(life_expectancies) / len(life_expectancies)
+    else:
+        avg_life_expectancy = None
+
+    # find the max and min life expectancies for the year
+    min_life_country_user = ""
+    min_life_expectancy_user = float("inf")
+
+    max_life_country_user = ""
+    max_life_expectancy_user = float("-inf")
+
+    if user_year in life_expectancies_by_year:
+        for entity, life_expectancy in life_expectancies_by_year[user_year]:
+            if life_expectancy < min_life_expectancy_user:
+                min_life_expectancy_user = life_expectancy
+                min_life_country_user = entity
+
+            if life_expectancy > max_life_expectancy_user:
+                max_life_expectancy_user = life_expectancy
+                max_life_country_user = entity
+
+    # print the results
+    print(f"The overall max life expectancy is: {max_life_expectancy} from"
+          f" {max_life_country} in {max_life_year}")
+    print(f"The overall min life expectancy is: {min_life_expectancy} from"
+          f" {min_life_country} in {min_life_year}")
+
+    # print the results for the user's year
+    if avg_life_expectancy is not None:
+        print(f"\nFor the year {user_year}:")
+        print(f"The average life expectancy across all countries was"
+              f" {avg_life_expectancy:.2f}")
+        print(f"The max life expectancy was in {max_life_country_user} with"
+              f" {max_life_expectancy_user}")
+        print(f"The min life expectancy was in {min_life_country_user} with"
+              f" {min_life_expectancy_user}")
+    else:
+        print(f"\nNo data for {user_year}")
+elif search_type == 'c':
+    # ask the user for a country
+    user_country = input("Enter the country of interest: ").capitalize()
+
+    if user_country in life_expectancies_by_country:
+        # find the data for the country
+        country_data = life_expectancies_by_country[user_country]
+
+        # find the max and min life expectancies for the country
+        # use the max and min functions with a lambda function
+        max_year_country = max(country_data, key=lambda x: x[1])
+        min_year_country = min(country_data, key=lambda x: x[1])
+
+        # display the results for the user-specified country
+        print(f"Country: {user_country}")
+        print(f"The highest life expectancy was in {max_year_country[0]} in"
+              f" {max_year_country[1]:.2f} years.")
+        print(f"The lowest life expectancy was in {min_year_country[0]} in"
+              f" {min_year_country[1]:.2f} years.")
+    else:
+        print(f"\nNo data for {user_country}")
 else:
-    avg_life_expectancy = None
-
-# find the max and min life expectancies for the year
-min_life_country_user = ""
-min_life_expectancy_user = float("inf")
-
-max_life_country_user = ""
-max_life_expectancy_user = float("-inf")
-
-if user_year in life_expectancies_by_year:
-    for entity, life_expectancy in life_expectancies_by_year[user_year]:
-        if life_expectancy < min_life_expectancy_user:
-            min_life_expectancy_user = life_expectancy
-            min_life_country_user = entity
-
-        if life_expectancy > max_life_expectancy_user:
-            max_life_expectancy_user = life_expectancy
-            max_life_country_user = entity
-
-# print the results
-print(f"The overall max life expectancy is: {max_life_expectancy} from"
-      f" {max_life_country} in {max_life_year}")
-print(f"The overall min life expectancy is: {min_life_expectancy} from"
-      f" {min_life_country} in {min_life_year}")
-
-# print the results for the user's year
-if avg_life_expectancy is not None:
-    print(f"\nFor the year {user_year}:")
-    print(f"The average life expectancy across all countries was"
-          f" {avg_life_expectancy:.2f}")
-    print(f"The max life expectancy was in {max_life_country_user} with"
-          f" {max_life_expectancy_user}")
-    print(f"The min life expectancy was in {min_life_country_user} with"
-          f" {min_life_expectancy_user}")
-else:
-    print(f"\nNo data for {user_year}")
+    print("Invalid choice. Please type "'Y'" for year or "'C'" for country.")
